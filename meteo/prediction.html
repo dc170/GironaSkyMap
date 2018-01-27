@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+			#chart-container {
+				background-color: #FFFAFA;
+				border: 1px solid black;
+				padding: 5px;
+			}
+				.imgtuto img{
+				width:100%;
+				height:100%;
+				border: 2px solid;
+				margin: 5px;
+			
+			}
+			
+		</style>
+  <meta charset="utf-8">
+  <title>GironaSkyMap dashboard</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+  <!-- Demo Dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+
+  <!-- Dashboard -->
+  <link href="../../assets/css/keen-dashboards.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="keen-dashboard" style="padding-top: 80px;">
+
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="navbar-brand" href="index.html">Sobre el projecte i la API</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+          <li><a href="graph.html">Gràfics</a></li>
+          <li><a href="http://gironaskymap.com/api/api.php?getdata=1">Baixa el dataset</a></li>
+          <li><a href="minmax.html">Mínims i màxims</a></li>
+          <li><a href="prediction.html">Predicció de valors en el temps</a></li>
+          <li><a href="monitor.html">Últims valors capturats</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-sm-5">
+        <div id="chart-container">
+			<div class="imgtuto">
+			<h4>Predicció temperatura per mesura presa cada 15 segons, inici 2017-12-18 02:43:13 fi: 2017-12-18 05:15:14</h4>
+			<img src="img/pred_temperatura.png">
+			</div>
+		</div>
+        <br>
+      </div>
+      
+      <div class="col-sm-5">
+        <div id="chart-container">
+			<div class="imgtuto">
+				<h4>Predicció humitat per mesura presa cada 15 segons, inici 2017-12-18 01:24:29 fi: 2017-12-18 05:15:14</h4>
+			<img src="img/pred_humitat.png">
+			</div>
+			</div>
+		</div>
+        <br>
+      </div>
+      
+      <div class="col-sm-10">
+        <div id="chart-container">
+			
+				<p>En blau el curs normal del gràfic, en vermell la predicció(30% de la mostra), en verd les dades utilitzades per el l'entrenament de la xarxa (el 70% de la mostra). Les prediccions han estat realitzades utiltizant una xarxa neuronal de tipus <a href="https://en.wikipedia.org/wiki/Long_short-term_memory">LTSM</a> en Python. Podeu baixar el codi a <a href="files/neural.py">aquí</a>. Podeu baixar <a href="csv/temperatura.csv">el dataset de temperatura aquí </a> així com <a href="csv/humitat.csv">el dataset d'humitat aquí.</a> Això es només una mostra de com de bé ens ho podem passar amb les dades!</p>
+			
+			</div>
+			</div>
+		</div>
+        <br>
+      </div>
+
+      
+
+     
+
+    </div>
+    <hr>
+  </div>
+
+  <!-- Project Analytics -->
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+
+		<script type="text/javascript" src="js/lastvals.js"></script>
+
+
+</body>
+</html>

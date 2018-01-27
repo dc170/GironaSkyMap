@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+			#chart-container {
+				background-color: #FFFAFA;
+				border: 1px solid black;
+				padding: 5px;
+			}
+			#text-container {
+				font: 17px Consolas;
+				color:#000423;
+				background-color: #FAFBFF;
+				border: 1px solid black;
+				padding: 10px;
+			}
+			
+			.imgtuto img{
+				width:420px;
+				height:300px;
+				border: 2px solid;
+				margin: 5px;
+			}
+			
+			.caixacodi{
+				font: 17px Helvetica;
+				color:#181E4D;
+				background-color: #EAEAEA;
+				border: 1px solid gray;
+				padding: 5px;
+				margin:5px;
+			}
+			#text-container p{
+				color:#262626;
+			}
+			#text-container h3{
+				color:#262626;
+				text-decoration: underline;
+			}
+			#text-container h4{
+				color:#262626;
+				text-decoration: underline;
+			}
+		</style>
+  <meta charset="utf-8">
+  <title>GironaSkyMap dashboard</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+  <!-- Demo Dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+
+  <!-- Dashboard -->
+  <link href="../../assets/css/keen-dashboards.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="keen-dashboard" style="padding-top: 80px;">
+
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="navbar-brand" href="index.html">Sobre el projecte i la API</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+          <li><a href="graph.html">Gràfics</a></li>
+          <li><a href="http://gironaskymap.com/api/api.php?getdata=1">Baixa el dataset</a></li>
+          <li><a href="minmax.html">Mínims i màxims</a></li>
+          <li><a href="prediction.html">Predicció de valors en el temps</a></li>
+          <li><a href="monitor.html">Últims valors capturats</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-sm-12">
+        <div id="text-container">
+			<h3>Sobre el projecte</h3>
+			<p>El projecte GironaSkyMap neix a la provincia de Girona amb l'objectiu de crear una xarxa distribuida d'estacions meteorològiques casolanes de baix cost connectades en xarxa per a compartir dades i d'aquesta manera poder facilitar la feina a aquells que estudien el clima i les seves característiques.
+			El projecte va sorgir de la ma d'un estudiant de la UdG que va decidir posar en marxa un globus sonda atmosfèric per tal de recollir dades sobre temperatura, humitat, pressió, alçada i lluminositat així com fotografies mitjançant una petita estació atmosfèrica acoplada a un globus sonda. Un cop dut a terme l'experiment es va decidir oferir la oportunitat a altres amants de la tecnologia i la meteorologia per a poder replicar l'experiment o instal·lar una estació meteorològica a casa i compartir dades.
+			Per a facilitar la compartició de dades s'ofereix la llista de material i els dissenys per a facilitar el muntatge d'una petita estació meteorològica casolana, també s'ofereix una API escrita en PHP que en una primera instància facilitarà la feina d'adquisició de dades d'alguna o totes les estacions connectades al sistema, mes endavant l'API permetrà inserir dades de manera senzilla mitjançant un servei de token. Així doncs actualment el sistema es troba en fase de proves, per tant les funcionalitats de l'API encara es troben limitades.
+			Si tens curiositat per l'experiment i t'agradaria instal·lar una estació meteorològica a casa o a on sigui, contacta amb <i>m u n y o z . 1 5 [at] gmail{dot}com</i>.
+			</p>
+			<h4>Raspberry PI</h4>
+			<ul>
+				<li><a href="https://www.amazon.es/Raspberry-Pi-Modelo-Quad-core-Cortex-A53/dp/B01CD5VC92/ref=sr_1_4?s=computers&ie=UTF8&qid=1516482002&sr=1-4&keywords=raspberry+pi+3">Raspberry PI 3b</a></li>
+				<li><a href="https://www.amazon.es/Kuman-M%C3%B3dulo-Raspberry-Soporte-Nocturna/dp/B0759NWTGC/ref=sr_1_1_sspa?s=computers&ie=UTF8&qid=1516482002&sr=1-1-spons&keywords=raspberry+pi+3&psc=1">Raspberry PI 3b càmera (opcional)</a></li>
+			</ul>
+			<h4>Sensors</h4>
+			<ul>
+				<li><a href="https://www.amazon.es/s/ref=nb_sb_noss?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&url=search-alias%3Delectronics&field-keywords=AM2302&rh=n%3A599370031%2Ck%3AAM2302">Humitat - AM2302</a></li>
+				<li><a href="https://www.amazon.es/SunFounder-DS18B20-Temperature-Arduino-Raspberry/dp/B013GB27HS">Temperatura - DS18B20</a></li>
+				<li><a href="https://www.amazon.es/s/ref=nb_sb_noss?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&url=search-alias%3Delectronics&field-keywords=TSL2561">Llum - TSL2561</a></li>
+				<li><a href="https://www.amazon.es/s/ref=nb_sb_noss?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&url=search-alias%3Delectronics&field-keywords=BMP180&rh=n%3A599370031%2Ck%3ABMP180">Pressió - BMP180</a></li>
+			</ul>
+			<h4>Circuit PCB</h4>
+			<div class='imgtuto'><img src="img/2.jpeg"></div>
+			<a href="esquema">Baixa l'esquematic (fitxer multisim)</a>
+			<h3>Muntatge</h3>
+			<div class='imgtuto'><img src="img/1.jpeg"></div>
+			<div class='imgtuto'><img src="img/3.jpeg"></div>
+			<h4>Interconnexions</h4>
+			
+			<h3>Lectura de dades</h3>
+			<h4>Llibreries</h4>
+			<div class="caixacodi">
+				<p>apt-get install python-pip</p>
+				<p>pip install adafruit_python_dht</p>
+				<p>sudo apt-get install build-essential libi2c-dev i2c-tools python-dev libffi-dev</p>
+				<p>pip install cffi</p>
+				<p>pip install smbus-cffi</p>
+				<p>git clone https://github.com/adafruit/Adafruit_Python_BMP</p>
+				<p>cd Adafruit_Python_BMP</p>
+				<p>python setup.py install</p>
+				<p>pip install w1thermsensor</p>
+			</div>
+			Un cop afegides les dependències, caldrà importar correctament les llibreries:
+			<div class="caixacodi">
+				<pre>		
+import sys # opcional
+import Adafruit_DHT
+import smbus
+import time #opcional
+import Adafruit_BMP.BMP085 as BMP085
+from w1thermsensor import W1ThermSensor
+import MySQLdb #opcional
+				</pre>
+				</div>
+			<h4>Temperatura</h4>
+			<div class="caixacodi"><pre>
+def temperatura():
+	modelSensor = "DS18B20" # sensor resistent a humitat
+	for sensor in W1ThermSensor.get_available_sensors():
+		print("Sensor %s te temperatura %.2f" % (sensor.id, sensor.get_temperature()))
+</pre>
+				
+			</div>
+			<h4>Humitat</h4>
+			<div class="caixacodi"><pre>
+def sensorhumitat():
+	humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 19)
+	if humidity is not None and temperature is not None:
+		print('Temperatura={0:0.1f}*  Humitat={1:0.1f}%'.format(temperature, humidity))
+	else:
+		print('Error en la lecutra del sensor AM2302!')
+		sys.exit(1)
+	return humidity,temperature
+	</pre>
+			</div>
+			<h4>Pressió</h4>
+			<div class="caixacodi"><pre>
+def pressio():
+	preassure = BMP085.BMP085()
+
+	print('Temp = {0:0.2f} *C'.format(preassure.read_temperature()))
+	print('Pressure = {0:0.2f} Pa'.format(preassure.read_pressure()))
+	print('Altitude = {0:0.2f} m'.format(preassure.read_altitude()))
+	print('Sealevel Pressure = {0:0.2f} Pa'.format(preassure.read_sealevel_pressure()))
+	pres = preassure.read_pressure() # pressio en Pa
+	altitud = preassure.read_altitude() # podem retornar altitud
+	mar = preassure.read_sealevel_pressure() #presio nivell mar
+	return pres
+			</pre>
+				
+			</div>
+			<h4>Lluminositat</h4>
+			<div class="caixacodi"><pre>
+def llum():
+	# TSL2561 address, 0x39(57)
+	# Select control register, 0x00(00) with command register, 0x80(128)
+	#		0x03(03)	Power ON mode
+	bus.write_byte_data(0x39, 0x00 | 0x80, 0x03)
+	# TSL2561 address, 0x39(57)
+	# Select timing register, 0x01(01) with command register, 0x80(128)
+	#		0x02(02)	Nominal integration time = 402ms
+	bus.write_byte_data(0x39, 0x01 | 0x80, 0x02)
+
+	time.sleep(0.5)
+
+	# Read data back from 0x0C(12) with command register, 0x80(128), 2 bytes
+	# ch0 LSB, ch0 MSB
+	data = bus.read_i2c_block_data(0x39, 0x0C | 0x80, 2)
+
+	# Read data back from 0x0E(14) with command register, 0x80(128), 2 bytes
+	# ch1 LSB, ch1 MSB
+	data1 = bus.read_i2c_block_data(0x39, 0x0E | 0x80, 2)
+	
+	# Convert the data
+	ch0 = data[1] * 256 + data[0]
+	ch1 = data1[1] * 256 + data1[0]
+
+	# Output data to screen
+	print "Full Spectrum(IR + Visible) :%d lux" %ch0
+	print "Infrared Value :%d lux" %ch1
+	print "Visible Value :%d lux" %(ch0 - ch1)
+	visible = ch0 - ch1
+	return visible
+</pre>	
+			</div>
+			
+			<h3>Inserció de dades</h3>
+			<h4>Base de dades</h4>
+			<a href="files/meteo.sql">Baixar estructura de la base de dades</a>
+			<h4>Inserció via MYSQL amb python</h4>
+			<div class="caixacodi">
+				<pre>
+import MySQLdb
+import Adafruit_BMP.BMP085 as BMP085
+
+bus = smbus.SMBus(1)
+
+conn = MySQLdb.connect(host= "1.1.1.1",
+                  user="USER",
+                  passwd="******!",
+                  db="*****")
+                  
+x = conn.cursor()
+def insertMesura(x,db):
+	t = time.strftime('%Y-%m-%d %H:%M:%S')
+	sensorid = 1
+	lloc = "UDGEEKS"
+	query = "insert into mesura (lloc, data, sensor) values ('%s','%s',%s)" % (lloc,t,sensorid)
+	x.execute(query)
+	db.commit()
+	return x.lastrowid
+
+def presio(x,db,idmesura):
+	preassure = BMP085.BMP085()
+
+	print('Temp = {0:0.2f} *C'.format(preassure.read_temperature()))
+	print('Pressure = {0:0.2f} Pa'.format(preassure.read_pressure()))
+	print('Altitude = {0:0.2f} m'.format(preassure.read_altitude()))
+	print('Sealevel Pressure = {0:0.2f} Pa'.format(preassure.read_sealevel_pressure()))
+	pres = preassure.read_pressure()
+	altitud = preassure.read_altitude()
+	mar = preassure.read_sealevel_pressure()
+	modelSensor = "BMP180"
+	query = "insert into barometre (modelSensor, mesura, presio, altitud, nivellmar) values ('%s',%s,%s,%s,%s)" % (modelSensor, idmesura, pres, altitud, mar )
+	x.execute(query)
+	db.commit()
+	
+while True:
+	idmesura = insertMesura(x,conn)
+	presio(x,conn,idmesura)
+	
+	time.sleep(300)	
+				</pre>
+			</div>
+			
+			<h3>Recuperació de dades</h3>
+			<h4>Filtrat per sensor i dades</h4>
+			<p>Per a treballar consultant les dades podem fer servir els següents camps:</p>
+			<ul>
+				<li>presio (pressió atm en Pa)</li>
+				<li>llum (espectre de llum visible en lumens)</li>
+				<li>temperatura (en graus ºC)</li>
+				<li>humitat (en %)</li>
+				<li>altitud (alçada en m)</li>
+				<li>sensor (fa ref. a una estació connectada al sistema, valors a partir de 1)</li>
+				<li>data (data en format date de mysql o datetime de mysql segons el cas, veure exemples)</li>
+			</ul>
+			<h4>Valors mínims i màxims</h4>
+			<p>Podem obtenir informació sobre per exemple el mínim de temperatura en un dia d'un sensor(estació) amb: gironaskymap.com/api/api.php?minval=temperatura&data=2017-12-18&sensor=1 Els camps data i sensor son opcionals</p>
+			<p>Podem obtenir informació sobre per exemple el màxim de temperatura en un dia d'un sensor(estació) amb: gironaskymap.com/api/api.php?maxval=temperatura&data=2017-12-18&sensor=1 Els camps data i sensor son opcionals</p>
+			<h4>Valors promig</h4>
+			<p>Podem obtenir informació sobre per exemple el promig de temperatura en un dia d'un sensor(estació) amb: gironaskymap.com/api/api.php?avgval=temperatura&data=2017-12-18&sensor=1 Els camps data i sensor son opcionals</p>
+			<h4>Informació d'una mesura</h4>
+			<p>Podem obtenir informació en forma de llista sobre: temperatura, humitat, presio(pressió), llum o altitud(alçada): gironaskymap.com/api/api.php?dumptable=temperatura&data=2017-12-18&sensor=1 Els camps data i sensor son opcionals. </p>
+			<h4>Informació entre dates</h4>
+			Podem obtenir informació de totes les mesures entre dues dates amb: gironaskymap.com/api/api.php?getdata=1&begin=2017-12-18%2002:44:26&end=2017-12-18%2004:44:26 També podem ometre el camp begin per obtenir informació fins a una data determinada des del principi
+			O també podem obtenir el cam end per obtenir informació fins a una data en concret des de l'inici fins la data. També podem acompanyar la consulta amb el camp "sensor" per obtenir la informació esmentada d'un sensor en particular.
+			<h4>Informació en "temps real"</h4>
+			<p>Podem accedir a la última mesura de cadascuna de les unitats que medim mitjançant: gironaskymap.com/api/api.php?lastval=llum on lastval pot referir-se a llum, humitat, presio(pressió), altitud o temperatura
+			També podem acompanyar la consulta amb el camp sensor per obtenir l'últim valor de la taula buscada d'un sensor en particular.
+			
+			</p>
+		</div>
+        <br>
+      </div>
+      
+    
+
+      
+
+     
+
+    </div>
+    <hr>
+  </div>
+
+  <!-- Project Analytics -->
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+
+
+
+</body>
+</html>
